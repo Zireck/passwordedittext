@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/Zireck/passwordedittext.svg)](https://jitpack.io/#Zireck/passwordedittext)
+
 # passwordedittext
 
 This is the implementation of an EditText user friendly for password inputs. It allows you to watch what are you writing using two modes: "on long press" and "onclick". It allows to personalize the icon you use for giving user feedbak
