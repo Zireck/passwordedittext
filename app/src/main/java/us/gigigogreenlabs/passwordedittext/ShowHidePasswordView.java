@@ -2,13 +2,17 @@ package us.gigigogreenlabs.passwordedittext;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-
+import android.widget.Toast;
+import com.example.PassValidator;
+import com.example.Validator;
 
 /**
  * Created by josemoralejo on 19/5/15.
@@ -68,6 +72,7 @@ public class ShowHidePasswordView  extends EditText{
 
     private void setListeners() {
         this.setOnTouchListener(onTouchListener);
+        this.addTextChangedListener(onEditTextChanged);
     }
 
     OnTouchListener onTouchListener = new OnTouchListener() {
@@ -108,6 +113,23 @@ public class ShowHidePasswordView  extends EditText{
             return false;
         }
 
+    };
+
+    TextWatcher onEditTextChanged = new TextWatcher() {
+        @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override public void afterTextChanged(Editable editable) {
+            Validator passValidator = new PassValidator(editable.toString());
+            if (!passValidator.validate()) {
+                Toast.makeText(getContext(), "Pass is not valid", Toast.LENGTH_SHORT).show();
+            }
+        }
     };
 
     private void performHidePassword() {
